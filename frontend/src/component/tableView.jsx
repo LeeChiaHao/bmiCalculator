@@ -36,11 +36,23 @@ function TableView() {
                         <td>{person.weight}</td>
                         <td>{person.height}</td>
                         <td>{person.bmi}</td>
+                        <td>
+                            <button type='submit' className='btn btn-danger' onClick={(e) => { deletePerson(e, person.id) }}>
+                                Delete
+                            </button>
+                        </td>
                     </tr>
                 ))}
             </tbody>
         </table>
     );
+
+    // perform the delete request (DELETE)
+    async function deletePerson(e, id) {
+        await fetch(URL + "/" + id, { method: 'DELETE' });
+        window.location.reload();
+        e.preventDefault();
+    }
 }
 
 export default TableView;
